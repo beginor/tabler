@@ -140,7 +140,13 @@ Don't forget to expose the port 3000 so you can browse the website locally.
 You can also expose the port 3001 to have access to BrowserSync
 
 ```sh
-docker run -p 3000:3000 -p 3001:3001 -v $(pwd)/src:/app/src -v $(pwd)/_config.yml:/app/_config.yml tabler
+docker run --rm --name tabler -p 3000:3000 -p 3001:3001 \
+  -v $(pwd)/src:/app/src \
+  -v $(pwd)/demo:/app/demo \
+  -v $(pwd)/dist:/app/dist \
+  -v $(pwd)/_config.yml:/app/_config.yml \
+  -v $(pwd)/_config_prod.yml:/app/_config_prod.yml \
+  tabler
 ```
 
 Now open your browser to [http://localhost:3000](http://localhost:3000). Edit anything in the `src/` folder and watch your browser refresh the page after it has been rebuilt.
